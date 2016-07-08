@@ -31,7 +31,7 @@ spec:
           - name: https
             containerPort: 443
       - name: pttg-mongodb
-        image: quay.io/ukhomeofficedigital/pttg-mongodb:${ pt-income-version }
+        image: quay.io/ukhomeofficedigital/pttg-test-mongodb:${ pt-income-version }
         resources:
           limits:
             cpu: 200m
