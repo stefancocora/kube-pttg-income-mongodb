@@ -7,9 +7,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: https
-    port: 443
-    containerPort: https
+  - name: http
+    port: 27017
+    containerPort: http
     nodePort: ${ptincome_port}
   selector:
     name: pttg-mongodb
