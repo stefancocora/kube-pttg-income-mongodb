@@ -1,5 +1,6 @@
-apiVersion: v1
-kind: ReplicationController
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   name: pttg-mongodb
   labels:
@@ -7,7 +8,8 @@ metadata:
 spec:
   replicas: 1
   selector:
-    name: pttg-mongodb
+    matchLabels:
+      name: pttg-mongodb
   template:
     metadata:
       labels:
@@ -15,15 +17,20 @@ spec:
     spec:
       containers:
       - name: pttg-mongodb
-        image: quay.io/ukhomeofficedigital/pttg-test-mongodb:${ pt-income-version }
+        image: quay.io/ukhomeofficedigital/pttg-test-mongodb:{{.VERSION}}
         resources:
           limits:
             cpu: 200m
             memory: 1024Mi
           requests:
-            cpu: 200m
-            memory: 1024Mi
+            cpu: 100m
+            memory: 256Mi
         ports:
           - name: http
             containerPort: 27017
+        livenessProbe:
+          tcpSocket:
+            port: 27017
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
         imagePullPolicy: Always

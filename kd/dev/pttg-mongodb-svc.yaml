@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -5,11 +6,9 @@ metadata:
     name: pttg-mongodb
   name: pttg-mongodb
 spec:
-  type: NodePort
   ports:
   - name: http
     port: 27017
-    containerPort: http
-    nodePort: ${ptincome_port}
+    targetPort: http
   selector:
     name: pttg-mongodb
