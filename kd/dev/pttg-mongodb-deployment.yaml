@@ -18,6 +18,9 @@ spec:
       containers:
       - name: pttg-mongodb
         image: quay.io/ukhomeofficedigital/pttg-test-mongodb:{{.VERSION}}
+        env:
+          - name: JAVA_OPTS
+            value: "-Xms512m -Xmx768m"
         resources:
           limits:
             cpu: 200m
